@@ -7,7 +7,11 @@ app.set('view engine', 'pug');
 app.set('views', './views');
 
 app.get('/pug', function(req, res) {
-    res.render("example");
+    res.render("example", {
+        name: "Vishal Lotlikar",
+        url: "https://www.google.com",
+        skills: ["NodeJS", "Angular", "Ruby"]
+    });
 })
 
 function logInfo(req, res, next){
