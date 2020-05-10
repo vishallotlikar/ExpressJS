@@ -1,0 +1,10 @@
+doctype html
+html
+    head
+        title First Pug Page
+    body
+        if(data)
+            h1 Hello #{data.name}
+            h2 City: #{data.city}
+        else
+            h1(style="color:red") Object not set.
