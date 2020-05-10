@@ -2,21 +2,30 @@ doctype html
 html
     head
         title First Pug Page
-    body
-        h1.mainHeading#mainHeading(style="background-color: orange;") Vishal Lotlikar
-        p.mainParagraph.customStyle How are you?
-        a(href="https://www.google.com") Google
-        p
-        | Relied upon by more than 11 million developers worldwide, 
-        | npm is committed to making JavaScript development elegant, productive, and safe. 
-        | The free npm Registry has become the center of JavaScript code sharing, 
-        | and with more than one million packages, the largest software registry in the world. 
-        | Our other tools and services take the Registry, and the work you do around it, to the next level.
-        // Comment here!!
-        // h2=name
-        h2 Hello #{name}
-        a(href=url) Google
-        ul
-            li=skills[0]
-            li=skills[1]
-            li=skills[2]
+        style
+            include ./assets/css/style.css
+        script
+            include ./assets/js/custom.js
+    body(onload="message()")
+
+    include ./component/header.pug
+
+    h1.mainHeading#mainHeading(style="background-color: orange;") Vishal Lotlikar
+    p.mainParagraph.customStyle How are you?
+    a(href="https://www.google.com") Google
+    p
+    | Relied upon by more than 11 million developers worldwide, 
+    | npm is committed to making JavaScript development elegant, productive, and safe. 
+    | The free npm Registry has become the center of JavaScript code sharing, 
+    | and with more than one million packages, the largest software registry in the world. 
+    | Our other tools and services take the Registry, and the work you do around it, to the next level.
+    // Comment here!!
+    // h2=name
+    h2 Hello #{name}
+    a(href=url) Google
+    ul
+        li=skills[0]
+        li=skills[1]
+        li=skills[2]
+        
+    include ./component/footer.pug
