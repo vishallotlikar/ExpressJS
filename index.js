@@ -3,6 +3,13 @@ const app = express();
 
 const courses = require('./router/courses');
 
+app.set('view engine', 'pug');
+app.set('views', './views');
+
+app.get('/pug', function(req, res) {
+    res.render("example");
+})
+
 function logInfo(req, res, next){
     console.log("Hello Vishal");
     next();
