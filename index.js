@@ -1,5 +1,12 @@
 const express = require("express");
 const app = express();
+const bodyParser = require('body-parser');
+
+// JSON parsing
+app.use(bodyParser.json());
+
+//UrlEncoded Data Parsing
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use('/static', express.static('./views/file')); // import express static files
 // app.use(express.static('./views/file')); // import express static files
@@ -79,6 +86,16 @@ app.get('/message/:phone_number([0-9]{10})', function (req, res) {
 
 app.get('/static_file', function(req, res){
     res.render('static_file');
+})
+
+// Registration page routing
+app.get('/registration', function(req, res) {
+    res.render('registration');
+})
+
+// handelForm page routing
+app.get('/handelForm', function(req, res) {
+    res.send('handelForm page');
 })
 
 app.get('*', function (req, res) {
