@@ -1,12 +1,16 @@
 const express = require("express");
 const app = express();
 const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
 
 // JSON parsing
 app.use(bodyParser.json());
 
 //UrlEncoded Data Parsing
 app.use(bodyParser.urlencoded({ extended: true }));
+
+//CookieParser setup
+app.use(cookieParser());
 
 app.use('/static', express.static('./views/file')); // import express static files
 // app.use(express.static('./views/file')); // import express static files
@@ -96,6 +100,23 @@ app.get('/registration', function(req, res) {
 // handelForm page routing
 app.get('/handelForm', function(req, res) {
     res.send('handelForm page');
+})
+
+// Cookies
+app.get('/cookie_test', function(req, res) {
+    res.cookie("username", "Vishal"/*, { maxAge: 10000 }*/);
+    res.cookie("age", 26/*, { maxAge: 10000 }*/);
+    res.send('Cookie set...')
+})
+
+app.get('/cookie_check', function(req, res) {
+    res.send('Value: ' + JSON.stringify(req.cookies));
+    // res.send('Value: ' + req.cookies.username);
+})
+
+app.get('/cookie_clear', function(req, res) {
+    res.clearCookie('age')
+    res.send('Value: ' + req.cookies.age);
 })
 
 app.get('*', function (req, res) {
