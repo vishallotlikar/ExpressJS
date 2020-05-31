@@ -1,6 +1,9 @@
 const express = require("express");
 const app = express();
 
+app.use('/static', express.static('./views/file')); // import express static files
+// app.use(express.static('./views/file')); // import express static files
+
 const courses = require('./router/courses');
 
 app.set('view engine', 'pug');
@@ -26,7 +29,7 @@ app.get('/pug-page', function (req, res) {
 
 function logInfo(req, res, next) {
     console.log("Hello Vishal");
-    next();
+    next(); // request response cycle will never end if next(); is not added.
 };
 
 function addData(req, res, next) {
@@ -36,7 +39,7 @@ function addData(req, res, next) {
     };
 
     req.person = person;
-    next();
+    next(); // request response cycle will never end if next(); is not added.
 };
 
 app.use(logInfo);
@@ -45,7 +48,7 @@ app.use(addData);
 app.use('/user/:id([0-3]{1})', function (req, res, next) {
     var name = ['Sandeep', 'Amit', 'Deepak', 'Aman'];
     req.name = name[req.params.id];
-    next();
+    next(); // request response cycle will never end if next(); is not added.
 })
 
 app.get('/user/:id([0-3]{1})', function (req, res) {
@@ -72,6 +75,10 @@ app.get('/:course_name/courses/:id', function (req, res) {
 
 app.get('/message/:phone_number([0-9]{10})', function (req, res) {
     res.send("Message to " + req.params.phone_number);
+})
+
+app.get('/static_file', function(req, res){
+    res.render('static_file');
 })
 
 app.get('*', function (req, res) {
