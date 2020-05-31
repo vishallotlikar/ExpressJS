@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
+const session = require('express-session');
 
 // JSON parsing
 app.use(bodyParser.json());
@@ -11,6 +12,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 //CookieParser setup
 app.use(cookieParser());
+
+//Session setup
+app.use(session({ secret: 'session_password' }));
 
 app.use('/static', express.static('./views/file')); // import express static files
 // app.use(express.static('./views/file')); // import express static files
@@ -117,6 +121,17 @@ app.get('/cookie_check', function(req, res) {
 app.get('/cookie_clear', function(req, res) {
     res.clearCookie('age')
     res.send('Value: ' + req.cookies.age);
+})
+
+// Session
+app.get('/session_test', function(req, res) {
+    if (req.session.count) {
+        req.session.count++;
+        res.send('Count ' + req.session.count);
+    } else {
+        req.session.count = 1;
+        res.send('First time count ' + req.session.count)
+    }
 })
 
 app.get('*', function (req, res) {
